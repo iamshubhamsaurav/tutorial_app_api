@@ -21,6 +21,6 @@ const chapterSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Chapter = mongoose.model()
+const Chapter = mongoose.model('Chapter', chapterSchema)
 
 module.exports = Chapter
