@@ -1,101 +1,63 @@
 const Blog = require('../models/Book')
+const asyncHandler = require('../utils/asyncHandler')
 
-exports.getBooks = async(req, res, next) => {
-    try {
-        const blogs = await Blog.find()
-        res.status(200).json({
-            success: true,
-            count: blogs.length,
-            blogs
-        })
-    } catch (error) {
-        res.status(400).json({
+exports.getBooks = asyncHandler(async (req, res, next) => {
+    const blogs = await Blog.find()
+    res.status(200).json({
+        success: true,
+        count: blogs.length,
+        blogs
+    })
+})
+
+exports.getBook = asyncHandler(async (req, res, next) => {
+
+    const blog = await Blog.findById(req.params.id)
+
+    if (!blog) {
+        return res.status(404).json({
             success: false,
-            message: error.message,
-            error
-        })
-    }   
-}
-
-exports.getBook = async(req, res, next) => {
-    try {
-        const blog = await Blog.findById(req.params.id)
-
-        if(!blog) {
-            return res.status(404).json({
-                success: false,
-                message: `Resource not found with the id: ${req.params.id}`
-            })
-        }
-
-        res.status(200).json({
-            success: true,
-            blog
-        })
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }   
-}
-
-
-exports.createBook = async(req, res, next) => {
-    try {
-        const blog = await Blog.create(req.body);
-        res.status(200).json({
-            success: true,
-            blog
-        })
-        
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
+            message: `Resource not found with the id: ${req.params.id}`
         })
     }
-}
 
-exports.updateBook = async (req, res, next) => {
-    try {
-        const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        })
+    res.status(200).json({
+        success: true,
+        blog
+    })
+})
 
-        res.status(200).json({
-            success: true,
-            blog
-        })
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
 
-exports.deleteBook = async (req, res, next) => {
-    try {
-        const blog = await Blog.findByIdAndDelete(req.params.id)
+exports.createBook = asyncHandler(async (req, res, next) => {
+    const blog = await Blog.create(req.body);
+    res.status(200).json({
+        success: true,
+        blog
+    })
+})
 
-        res.status(200).json({
-            success: true,
-            message: "Blog post was deleted",
-            blog
-        })
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
+exports.updateBook = asyncHandler(async (req, res, next) => {
+
+    const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    })
+
+    res.status(200).json({
+        success: true,
+        blog
+    })
+})
+
+exports.deleteBook = asyncHandler(async (req, res, next) => {
+    const blog = await Blog.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({
+        success: true,
+        message: "Blog post was deleted",
+        blog
+    })
+})
 
 
 
