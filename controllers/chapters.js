@@ -1,7 +1,8 @@
 const Chapter = require('../models/Chapter')
+const asyncHandler = require('../utils/asyncHandler')
 
-exports.getChapters = async(req, res, next) => {
-    try {
+exports.getChapters = asyncHandler(async(req, res, next) => {
+
         const chapters = await Chapter.find()
         
         res.status(200).json({
@@ -9,37 +10,19 @@ exports.getChapters = async(req, res, next) => {
             count: chapters.length,
             chapters
         })
+})
 
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
-
-exports.createChapter = async(req, res, next) => {
-    try {
+exports.createChapter = asyncHandler(async(req, res, next) => {
         const chapter = await Category.create(req.body)
         
         res.status(201).json({
             success: true,
             chapter
         })
-
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
+})
 
 
-exports.getChapter = async(req, res, next) => {
-    try {
+exports.getChapter = asyncHandler(async(req, res, next) => {
         const chapter = await Chapter.findById(req.params.id)
         
         if(!chapter) {
@@ -54,18 +37,10 @@ exports.getChapter = async(req, res, next) => {
             success: true,
             chapter
         })
+    
+})
 
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }    
-}
-
-exports.updateChapter = async(req, res, next) => {
-    try {
+exports.updateChapter = asyncHandler(async(req, res, next) => {
         let chapter = await Chapter.findById(req.params.id)
         
         if(!chapter) {
@@ -87,17 +62,9 @@ exports.updateChapter = async(req, res, next) => {
             chapter
         })
         
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
+})
 
-exports.deleteChapter = async(req, res, next) => {
-    try {
+exports.deleteChapter = asyncHandler(async(req, res, next) => {
         let chapter = await Chapter.findById(req.params.id)
         
         if(!chapter) {
@@ -115,12 +82,4 @@ exports.deleteChapter = async(req, res, next) => {
             message: "Chapter Deleted",
             chapter
         })
-        
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message,
-            error
-        })
-    }
-}
+})
