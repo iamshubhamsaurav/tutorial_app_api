@@ -1,5 +1,7 @@
 const express = require('express')
 
+const chapterRouter = require('../routes/chapters')
+
 const router = express.Router()
 
 const {
@@ -9,6 +11,8 @@ const {
     updateBook,
     deleteBook
 } = require('../controllers/books')
+
+router.use('/:bookId/chapters', chapterRouter)
 
 router.route('/')
         .get(getBooks)

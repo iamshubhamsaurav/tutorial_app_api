@@ -17,6 +17,11 @@ const chapterSchema = mongoose.Schema({
         default: "draft",
         required: [true, "Please provide a status"]
     },
+    bookId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Book',
+        required: [true, "Please provide a bookId for the chapter"]
+    }
 },{
     timestamps: true
 })
