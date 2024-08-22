@@ -9,7 +9,7 @@ exports.getChapters = asyncHandler(async (req, res, next) => {
     if(req.params.bookId) {
         const book = await Book.findById(req.params.bookId)
         if(!book) {
-            return next(new Error(`Book not found with the id of ${Book._id}`))
+            return next(new Error(`Book not found with the id of ${req.params.bookId}`))
         }
         chapters = await Chapter.find({bookId: book._id})
     } else {

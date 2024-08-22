@@ -1,4 +1,5 @@
 const Book = require('../models/Book')
+const Chapter = require('../models/Chapter')
 const asyncHandler = require('../utils/asyncHandler')
 
 exports.getBooks = asyncHandler(async (req, res, next) => {
@@ -62,6 +63,8 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
     if(!book) {
         return next(new Error(`Book not found with the id: ${req.params.id}`))
     }
+
+    await Chapter.deleteMany({bookId: book._id})
     
     book = await Book.findByIdAndDelete(req.params.id)
 
