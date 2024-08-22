@@ -1,12 +1,19 @@
 const express = require('express')
 const colors = require('colors')
 const morgan = require('morgan')
+const dotenv = require('dotenv')
 
+const connectDB = require('./config/db')
+
+dotenv.config({path: './config/config.env'})
+
+connectDB()
 
 const app = express()
 
 const bookRouter = require('./routes/books')
 const chapterRouter = require('./routes/chapters')
+const errorHandler = require('./middleware/errorHandler')
 
 app.use(express.json({}))
 
@@ -21,6 +28,8 @@ app.all("*", (req, res, next) => {
         message: "Resource Not Found"
     })
 })
+
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 4000
