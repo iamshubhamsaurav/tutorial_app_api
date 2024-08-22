@@ -9,10 +9,10 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide the description for the book"]
     },
-    genre: {
-        type: String,
-        required: [true, "Please provide a genre for the book"]
-    },
+    // genre: {
+        // type: String,
+    //     required: [true, "Please provide a genre for the book"]
+    // },
     status: {
         type: String,
         enum: ["draft", "review", "public"],
