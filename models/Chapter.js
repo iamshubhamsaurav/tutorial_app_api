@@ -1,4 +1,4 @@
-const mongoose = require('moongoose')
+const mongoose = require('mongoose')
 
 const chapterSchema = mongoose.Schema({
     title: {
