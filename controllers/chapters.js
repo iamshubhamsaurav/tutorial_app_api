@@ -1,6 +1,7 @@
 const Chapter = require('../models/Chapter')
 const Book = require('../models/Book')
 const asyncHandler = require('../utils/asyncHandler')
+const AppError = require('../utils/AppError')
 
 exports.getChapters = asyncHandler(async (req, res, next) => {
 
@@ -9,7 +10,7 @@ exports.getChapters = asyncHandler(async (req, res, next) => {
     if(req.params.bookId) {
         const book = await Book.findById(req.params.bookId)
         if(!book) {
-            return next(new Error(`Book not found with the id of ${req.params.bookId}`))
+            return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
         }
         chapters = await Chapter.find({bookId: book._id})
     } else {
@@ -27,7 +28,7 @@ exports.createChapter = asyncHandler(async (req, res, next) => {
 
     const book = await Book.findById(req.params.bookId)
     if (!book) {
-        return next(new Error("Book not found"))
+        return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
     }
     req.body.bookId = book._id
 
@@ -44,7 +45,7 @@ exports.getChapter = asyncHandler(async (req, res, next) => {
     const chapter = await Chapter.findById(req.params.id)
 
     if (!chapter) {
-        return next(new Error(`Chapter not found with the id of ${req.params.id}`))
+        return next(new AppError(`Chapter not found with the id: ${req.params.id}`, 404))
     }
 
     res.status(200).json({
@@ -58,7 +59,7 @@ exports.updateChapter = asyncHandler(async (req, res, next) => {
     let chapter = await Chapter.findById(req.params.id)
 
     if (!chapter) {
-        return next(new Error(`Chapter not found with the id of ${req.params.id}`))
+        return next(new AppError(`Chapter not found with the id: ${req.params.id}`, 404))
     }
 
     chapter = await Chapter.findByIdAndUpdate(req.params.id, req.body, {
@@ -78,7 +79,7 @@ exports.deleteChapter = asyncHandler(async (req, res, next) => {
     let chapter = await Chapter.findById(req.params.id)
 
     if (!chapter) {
-        return next(new Error(`Chapter not found with the id of ${req.params.id}`))
+        return next(new AppError(`Chapter not found with the id: ${req.params.id}`, 404))
     }
 
     chapter = await Chapter.findByIdAndDelete(req.params.id)
