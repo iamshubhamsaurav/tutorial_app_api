@@ -1,6 +1,7 @@
 const Book = require('../models/Book')
 const Chapter = require('../models/Chapter')
 const asyncHandler = require('../utils/asyncHandler')
+const AppError = require('../utils/AppError')
 
 exports.getBooks = asyncHandler(async (req, res, next) => {
     const books = await Book.find()
@@ -16,10 +17,7 @@ exports.getBook = asyncHandler(async (req, res, next) => {
     const book = await Book.findById(req.params.id)
 
     if (!book) {
-        return res.status(404).json({
-            success: false,
-            message: `Book not found with the id: ${req.params.id}`
-        })
+        return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
     }
 
     res.status(200).json({
@@ -42,7 +40,7 @@ exports.updateBook = asyncHandler(async (req, res, next) => {
     let book = await Book.findById(req.params.id)
 
     if(!book) {
-        return next(new Error(`Book not found with the id: ${req.params.id}`))
+        return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
     }
 
     book = await Book.findByIdAndUpdate(req.params.id, req.body, {
@@ -61,7 +59,7 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
     let book = await Book.findById(req.params.id)
 
     if(!book) {
-        return next(new Error(`Book not found with the id: ${req.params.id}`))
+        return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
     }
 
     await Chapter.deleteMany({bookId: book._id})
