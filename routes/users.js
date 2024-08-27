@@ -12,7 +12,6 @@ router
     .get(getUsers)
 
 router.route('/:id')
-    .route('/:id')
     .get(getUser)
 
 module.exports = router
