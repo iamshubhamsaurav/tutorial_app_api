@@ -1,0 +1,82 @@
+[
+    {
+        "_id": "66c707392b0eeb359edc9131",
+        "name": "Java Tutorials",
+        "description": "The one stop place for java programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-08-22T09:39:05.515Z",
+        "updatedAt": "2024-08-22T09:39:05.515Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f40e31c924deb27c494",
+        "name": "Javascript Tutorials",
+        "description": "The one stop place for javascript programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:52:48.543Z",
+        "updatedAt": "2024-09-01T06:52:48.543Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f4ee31c924deb27c496",
+        "name": "Python Tutorials",
+        "description": "The one stop place for python programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:53:02.742Z",
+        "updatedAt": "2024-09-01T06:53:02.742Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f59e31c924deb27c498",
+        "name": "Kotlin Tutorials",
+        "description": "The one stop place for kotlin programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:53:13.626Z",
+        "updatedAt": "2024-09-01T06:53:13.626Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f66e31c924deb27c49a",
+        "name": "C++ Tutorials",
+        "description": "The one stop place for C++ programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:53:26.696Z",
+        "updatedAt": "2024-09-01T06:53:26.696Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f72e31c924deb27c49c",
+        "name": "Rust Tutorials",
+        "description": "The one stop place for Rust programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:53:38.409Z",
+        "updatedAt": "2024-09-01T06:53:38.409Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f87e31c924deb27c49f",
+        "name": "Golang Tutorials",
+        "description": "The one stop place for Golang programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:53:59.649Z",
+        "updatedAt": "2024-09-01T06:53:59.649Z",
+        "__v": 0
+    },
+    {
+        "_id": "66d40f93e31c924deb27c4a1",
+        "name": "DBMS Tutorials",
+        "description": "The one stop place for DBMS programming",
+        "status": "draft",
+        "allowDownload": false,
+        "createdAt": "2024-09-01T06:54:11.322Z",
+        "updatedAt": "2024-09-01T06:54:11.322Z",
+        "__v": 0
+    }
+]
