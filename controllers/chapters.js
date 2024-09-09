@@ -28,7 +28,7 @@ exports.createChapter = asyncHandler(async (req, res, next) => {
 
     const book = await Book.findById(req.params.bookId)
     if (!book) {
-        return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
+        return next(new AppError(`Book not found with the id: ${req.params.bookId}`, 404))
     }
     req.body.bookId = book._id
 
