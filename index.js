@@ -16,6 +16,10 @@ const chapterRouter = require('./routes/chapters')
 const userRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const errorHandler = require('./middleware/errorHandler')
+//cors is required if the backend and front end are on different ports
+const cors = require('cors')
+
+app.use(cors())
 
 app.use(express.json({}))
 
