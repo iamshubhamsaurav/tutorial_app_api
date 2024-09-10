@@ -13,7 +13,8 @@ const app = express()
 
 const bookRouter = require('./routes/books')
 const chapterRouter = require('./routes/chapters')
-const userRoute = require('./routes/users')
+const userRouter = require('./routes/users')
+const authRouter = require('./routes/auth')
 const errorHandler = require('./middleware/errorHandler')
 
 app.use(express.json({}))
@@ -22,7 +23,8 @@ app.use(morgan('dev'))
 
 app.use('/api/v1/books', bookRouter)
 app.use('/api/v1/chapters', chapterRouter)
-app.use('/api/v1/users', userRoute)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/auth', authRouter)
 
 app.all("*", (req, res, next) => {
     res.status(404).json({
