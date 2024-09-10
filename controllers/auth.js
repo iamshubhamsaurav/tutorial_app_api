@@ -32,9 +32,13 @@ exports.login = asyncHandler(async (req, res, next) => {
     }
     
     // find the user with the same email
-    const user = await User.findOne({email})
+    const user = await User.findOne({email: req.body.email})
     if(!user) {
         return next(new AppError("User Not Found with the email", 404));
+    }
+
+    if(req.body.password.toString() !== user.password.toString()) {
+        return next(new AppError("Password does not match", 400))
     }
 
     res.status(200).json({
