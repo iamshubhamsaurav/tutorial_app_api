@@ -2,6 +2,7 @@ const Book = require('../models/Book')
 const Chapter = require('../models/Chapter')
 const asyncHandler = require('../utils/asyncHandler')
 const AppError = require('../utils/AppError')
+const cloudinary = require('cloudinary').v2
 
 exports.getBooks = asyncHandler(async (req, res, next) => {
     const books = await Book.find()

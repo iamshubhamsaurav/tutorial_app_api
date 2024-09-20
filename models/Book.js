@@ -23,7 +23,10 @@ const bookSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    coverImage: String,
+    coverImage: {
+        public_id: String,
+        secure_url: String
+    },
 }, {
     timestamps: true
 })
