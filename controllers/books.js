@@ -27,6 +27,21 @@ exports.getBook = asyncHandler(async (req, res, next) => {
 })
 
 exports.createBook = asyncHandler(async (req, res, next) => {
+    // uploading the image
+     if(req.files != null) {
+        let file = req.files.coverImage
+        if(file) {
+            let res = await cloudinary.uploader.upload(file.tempFilePath, {
+                folder: "tutorial_app/books"
+            })
+            req.body.coverImage = {
+                public_id: res.public_id,
+                secure_url: res.secure_url
+            }
+            
+        }
+    }
+
     const book = await Book.create(req.body);
     res.status(200).json({
         success: true,
