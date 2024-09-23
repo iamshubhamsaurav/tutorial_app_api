@@ -2,6 +2,8 @@ const express = require('express')
 const colors = require('colors')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
+const cloudinary = require('cloudinary').v2
+const fileUpload = require('express-fileupload')
 
 const connectDB = require('./config/db')
 
@@ -9,8 +11,24 @@ dotenv.config({path: './config/config.env'})
 
 connectDB()
 
+// cloudinary setup
+cloudinary.config({
+    cloud_name: "duiaomn93",
+    api_key: "631715326945545",
+    api_secret: "S9Zi3kAwUdrLJ5N4j91Xj1htRkY"
+})
+
 const app = express()
 
+// File upload middlewares
+app.use(express.urlencoded({extended: true}))
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}))
+
+
+// routers
 const bookRouter = require('./routes/books')
 const chapterRouter = require('./routes/chapters')
 const userRouter = require('./routes/users')

@@ -22,7 +22,11 @@ const bookSchema = new mongoose.Schema({
     allowDownload: {
         type: Boolean,
         default: false
-    }
+    },
+    coverImage: {
+        public_id: String,
+        secure_url: String
+    },
 }, {
     timestamps: true
 })
