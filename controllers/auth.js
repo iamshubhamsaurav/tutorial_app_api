@@ -25,19 +25,22 @@ exports.signup = asyncHandler(async (req, res, next) => {
 //@desc     Login User
 //@route    GET /api/v1/auth/login
 //@access   Public
+// I am changing this code block -S.K
+// The axios in my fron end can not send a body with a get request
+// It can only send query 'params' 
 exports.login = asyncHandler(async (req, res, next) => {
     // check if email and password exists
-    if(!req.body.email || !req.body.password) {
+    if(!req.params.email || !req.params.password) {
         return next(new AppError("Email or password not entered", 400))
     }
     
     // find the user with the same email
-    const user = await User.findOne({email: req.body.email})
+    const user = await User.findOne({email: req.params.email})
     if(!user) {
         return next(new AppError("User Not Found with the email", 404));
     }
 
-    if(req.body.password.toString() !== user.password.toString()) {
+    if(req.params.password.toString() !== user.password.toString()) {
         return next(new AppError("Password does not match", 400))
     }
 
