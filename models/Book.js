@@ -24,8 +24,14 @@ const bookSchema = new mongoose.Schema({
         default: false
     },
     coverImage: {
-        public_id: String,
-        secure_url: String
+        public_id: {
+            type: String,
+            required: [true, "Please provide a publuc id of cover image"]
+        },
+        secure_url: {
+            type: String,
+            required: [true, "Please Add secure_url"]
+        }
     },
 }, {
     timestamps: true
