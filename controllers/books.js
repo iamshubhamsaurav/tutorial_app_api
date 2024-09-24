@@ -59,6 +59,21 @@ exports.updateBook = asyncHandler(async (req, res, next) => {
         return next(new AppError(`Book not found with the id: ${req.params.id}`, 404))
     }
 
+    // uploading the image
+    if(req.files != null) {
+        let file = req.files.coverImage
+        if(file) {
+            let res = await cloudinary.uploader.upload(file.tempFilePath, {
+                folder: "tutorial_app/books"
+            })
+            req.body.coverImage = {
+                public_id: res.public_id,
+                secure_url: res.secure_url
+            }
+            
+        }
+    }
+    
     book = await Book.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true
