@@ -13,12 +13,14 @@ exports.signup = asyncHandler(async (req, res, next) => {
     }
 
     // encrypting the password
-    const SECRET_KEY = "1214"
-    const cipher = crypto.createCipheriv('aes192', SECRET_KEY) 
-    let encrypted = cipher.update(req.body.password, 'utf8', 'hex')  
-    encrypted += cipher.final('hex')
+    // const SECRET_KEY = crypto.randomBytes(32)
+    // const iv = crypto.randomBytes(16)
+    // // const cipher = crypto.createCipheriv('aes192', SECRET_KEY)
+    // const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(SECRET_KEY), iv) 
+    // let encrypted = cipher.update(req.body.password, 'utf8', 'hex')  
+    // encrypted += cipher.final('hex')
 
-    req.body.password = encrypted
+    // req.body.password = encrypted
     
     req.body.role = 'user'
     const user = await User.create(req.body)
@@ -49,14 +51,14 @@ exports.login = asyncHandler(async (req, res, next) => {
     }
 
     // decrypting the password
-    const SECRET_KEY = "1214"
-    const decipher = crypto.createDecipheriv('aes192', SECRET_KEY) 
-    let encrypted = user.password  
-    let decrypted = decipher.update(encrypted, 'hex', 'utf8')
-    decrypted += decipher.final('utf8')
+    // const SECRET_KEY = "1214"
+    // const decipher = crypto.createDecipheriv('aes192', SECRET_KEY) 
+    // let encrypted = user.password  
+    // let decrypted = decipher.update(encrypted, 'hex', 'utf8')
+    // decrypted += decipher.final('utf8')
     
-    // setting the user password to decrypted password and sending it to client
-    user.password = decrypted
+    // // setting the user password to decrypted password and sending it to client
+    // user.password = decrypted
 
     if(req.params.password.toString() !== user.password.toString()) {
         return next(new AppError("Password does not match", 400))
