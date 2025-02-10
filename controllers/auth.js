@@ -36,7 +36,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
 //@route    GET /api/v1/auth/login
 //@access   Public
 // I am changing this code block -S.K
-// The axios in my fron end can not send a body with a get request
+// The axios in my frontend can not send a body with a get request
 // It can only send query 'params' 
 exports.login = asyncHandler(async (req, res, next) => {
     // check if email and password exists
