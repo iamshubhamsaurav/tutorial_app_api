@@ -14,7 +14,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
 
     // encrypting the password
     const SECRET_KEY = "1214"
-    const cipher = crypto.createCipher('aes192', SECRET_KEY) 
+    const cipher = crypto.createCipheriv('aes192', SECRET_KEY) 
     let encrypted = cipher.update(req.body.password, 'utf8', 'hex')  
     encrypted += cipher.final('hex')
 
@@ -50,7 +50,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 
     // decrypting the password
     const SECRET_KEY = "1214"
-    const decipher = crypto.createDecipher('aes192', SECRET_KEY) 
+    const decipher = crypto.createDecipheriv('aes192', SECRET_KEY) 
     let encrypted = user.password  
     let decrypted = decipher.update(encrypted, 'hex', 'utf8')
     decrypted += decipher.final('utf8')
